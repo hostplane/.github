@@ -1,0 +1,35 @@
+name: Bug
+description: Beklenen davranıştan sapan bir hata
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Özet
+      description: Hatanın kısa tanımı.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Yeniden üretme adımları
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Beklenen davranış
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Gerçekleşen davranış
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Ortam
+      description: Sayfa adresi, tarayıcı, dil ve para birimi.

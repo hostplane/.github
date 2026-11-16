@@ -1,0 +1,29 @@
+name: Task
+description: Planlanan bir iş veya iyileştirme
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Amaç
+      description: İşin neden yapıldığı ve beklenen sonuç.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Kapsam
+      description: Yapılacak adımlar.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Tamamlanma ölçütü
+      description: İşin bittiğini gösteren koşullar.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notlar
+      description: Bağımlılıklar, bağlantılar ve ek bilgi.

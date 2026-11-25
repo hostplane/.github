@@ -1,0 +1,28 @@
+name: pr-body-cleanup-reusable
+
+# Removes session reference lines from a pull request description.
+# Called by the pr-body-cleanup workflow in every Hostplane repository.
+
+on:
+  workflow_call:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  cleanup:
+    name: Clean pull request description
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove session reference lines
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$REPO/pulls/$NUMBER" --jq '.body // ""' > body.md
+          grep -v -E 'claude\.ai/code|Generated with \[Claude Code\]' body.md > cleaned.md || true
+          if ! cmp -s body.md cleaned.md; then
+            gh api -X PATCH "repos/$REPO/pulls/$NUMBER" -F body=@cleaned.md --silent
+            echo "Description cleaned."
+          fi
